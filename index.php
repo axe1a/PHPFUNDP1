@@ -12,33 +12,31 @@
         <p>Password <input type="password" placeholder="Password here" name="password"></p>
         <p><input type="submit" value="Login" name="submitBtn"></p>
     </form>
-    <a href="unset.php"><input type="submit" value="Logout" name="logout"></p></a>
-    
+    <a href="unset.php"><input type="submit" value="Logout" name="logout"></a>
+
     <?php
+    // Display login warning if someone is already logged in
     if (isset($_SESSION['loginWarning'])) {
-        echo $_SESSION['loginWarning'];    
+        echo "<p>".$_SESSION['loginWarning']."</p>";
     }
     ?>
+
     <h2>
-        
         <?php
-        if(isset($_SESSION['firstName'])) {
-            echo 'User logged in: ';
-            echo $_SESSION['firstName'];
+        // If there's no login warning, display the logged-in user info
+        if (!isset($_SESSION['loginWarning']) && isset($_SESSION['firstName'])) {
+            echo 'User logged in: ' . $_SESSION['firstName'];
         }
-        ?>      
+        ?>
     </h2>
 
     <h2>
         <?php
-        if(isset($_SESSION['password'])) {
-            echo 'Password: ';
-            echo $_SESSION['password'];
+        // If there's no login warning, display the password (hashed)
+        if (!isset($_SESSION['loginWarning']) && isset($_SESSION['password'])) {
+            echo 'Password: ' . $_SESSION['password'];
         }
-        ?>      
+        ?>
     </h2>
-
-
-
 </body>
 </html>
